@@ -117,7 +117,7 @@ button:disabled{opacity:.4;cursor:not-allowed}
 .face.front b{color:var(--rc);font:700 1.6rem "Bebas Neue",serif}
 .face .big2{font-size:3.4rem;filter:drop-shadow(0 0 14px var(--rc))}
 .face small{font-size:.84rem;line-height:1.4;opacity:.92}
-.r-wolf{--rc:#ff5c7a}.r-seer{--rc:#a78bfa}.r-doc{--rc:#4fd1a5}.r-hunter{--rc:#ff9a4d}.r-witch{--rc:#d28bff}.r-vill{--rc:#ffc861}.r-guard{--rc:#5aa9ff}.r-gate{--rc:#d4d4d8}.r-elder{--rc:#d9c48f}.r-traitor{--rc:#c05a8f}.r-mimic{--rc:#4dd2d8}.r-thief{--rc:#c8803c}.r-hush{--rc:#8c9bff}.r-judge{--rc:#f2e94e}.r-wseer{--rc:#ff3b6b}.r-jester{--rc:#ff7ad9}
+.r-wolf{--rc:#ff5c7a}.r-seer{--rc:#a78bfa}.r-doc{--rc:#4fd1a5}.r-hunter{--rc:#ff9a4d}.r-witch{--rc:#d28bff}.r-vill{--rc:#ffc861}.r-guard{--rc:#5aa9ff}.r-gate{--rc:#d4d4d8}.r-elder{--rc:#d9c48f}.r-traitor{--rc:#c05a8f}.r-mimic{--rc:#4dd2d8}.r-thief{--rc:#c8803c}.r-hush{--rc:#8c9bff}.r-judge{--rc:#f2e94e}.r-wseer{--rc:#ff3b6b}.r-alpha{--rc:#ff6a3d}.r-angel{--rc:#f5e6a8}.r-jester{--rc:#ff7ad9}
 .hero{display:flex;gap:16px;align-items:center;padding-bottom:16px;margin-bottom:14px;border-bottom:1px solid var(--line)}
 .hero img{flex:none;width:104px;height:104px;border-radius:22px;background:#000;box-shadow:0 0 30px color-mix(in srgb,var(--accent) 50%,transparent);animation:float 5s ease-in-out infinite}
 .hero b{display:block;font:700 1.35rem/1.2 "Bebas Neue",serif;color:var(--accent)}
@@ -155,7 +155,7 @@ body.day .cloud{opacity:1}
 .vb i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));box-shadow:0 0 10px var(--accent);transition:width .3s}
 h3.sp{display:flex;align-items:center;gap:10px}
 h3.sp::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
-.rr.r-wolf,.rr.r-seer,.rr.r-doc,.rr.r-guard,.rr.r-gate,.rr.r-elder,.rr.r-traitor,.rr.r-mimic,.rr.r-thief,.rr.r-hush,.rr.r-judge,.rr.r-jester,.rr.r-wseer,.rr.r-hunter,.rr.r-witch,.rr.r-vill{border-bottom-color:color-mix(in srgb,var(--rc) 35%,transparent)}
+.rr.r-wolf,.rr.r-seer,.rr.r-doc,.rr.r-guard,.rr.r-gate,.rr.r-elder,.rr.r-traitor,.rr.r-mimic,.rr.r-thief,.rr.r-hush,.rr.r-judge,.rr.r-jester,.rr.r-wseer,.rr.r-alpha,.rr.r-angel,.rr.r-hunter,.rr.r-witch,.rr.r-vill{border-bottom-color:color-mix(in srgb,var(--rc) 35%,transparent)}
 .rr .ri i{border-color:var(--rc,var(--line));box-shadow:0 0 14px color-mix(in srgb,var(--rc,transparent) 40%,transparent)}
 .dist{display:flex;gap:3px;height:36px;border-radius:12px;overflow:hidden;margin:14px 0 4px;box-shadow:0 4px 16px var(--shadow)}
 .dist span{display:grid;place-items:center;min-width:0;font-weight:800;font-size:.85rem;color:#fff;background:linear-gradient(180deg,color-mix(in srgb,var(--rc) 80%,#fff 8%),color-mix(in srgb,var(--rc) 55%,#0b0d26))}
@@ -533,7 +533,7 @@ html[data-lite=on] .jb-grain,html[data-lite=on] .jb-c{display:none}
 @keyframes shdin{from{transform:scale(2.2);opacity:0}}
 .cs-gate .shk{animation:shkc .5s .2s ease-in both}
 @keyframes shkc{from{transform:translateY(-24px)}}
-.cs-elder .g,.cs-traitor .g,.cs-mimic .g,.cs-thief .g,.cs-hush .g,.cs-judge .g,.cs-jester .g,.cs-wseer .g{transform-box:fill-box;transform-origin:center;animation:shdin .6s .1s cubic-bezier(.2,.9,.2,1) both}
+.cs-elder .g,.cs-traitor .g,.cs-mimic .g,.cs-thief .g,.cs-hush .g,.cs-judge .g,.cs-jester .g,.cs-wseer .g,.cs-alpha .g,.cs-angel .g{transform-box:fill-box;transform-origin:center;animation:shdin .6s .1s cubic-bezier(.2,.9,.2,1) both}
 .cs-wolf .cl{stroke-dasharray:1;animation:draw .35s ease-out both}
 .cs-wolf .c1{animation-delay:.1s}
 .cs-wolf .c2{animation-delay:.24s}
@@ -766,6 +766,7 @@ const ROLES={
  guard:{n:'Bodyguard',e:'🛡️',d:'Tiap malam, jaga satu pemain lain. Jika dia diserang werewolf, kamu yang gugur menggantikannya. Boleh dilewati.'},
  gate:{n:'Penjaga Gerbang',e:'🔒',d:'Tiap malam, kunci satu pemain: kemampuannya tidak berfungsi malam itu. Tidak boleh orang yang sama dua malam berturut-turut. Boleh dilewati.'},
  wseer:{n:'Werewolf Pengintai',e:'🐺',d:'Werewolf yang ikut memilih korban. Sekali per permainan, tebak peran satu pemain: jika benar, dia gugur malam itu juga.'},
+ alpha:{n:'Alpha Werewolf',e:'👑',d:'Werewolf yang ikut memilih korban. Sekali, di malam pertama, ubah kartu satu pemain menjadi Werewolf atau Pengkhianat (mode ganda: pilih kartu ke-1 atau ke-2). Berlaku setelah malam pertama. Seer melihatmu sebagai Alpha Werewolf.'},
  traitor:{n:'Pengkhianat',e:'🐍',d:'Warga yang berpihak pada werewolf. Kamu tahu siapa werewolf, dan werewolf juga tahu siapa kamu. Seer melihatmu sebagai bukan werewolf. Menang bersama werewolf.'},
  hush:{n:'Pembisik',e:'🤫',d:'Tiap malam, bungkam satu pemain: besok dia tidak boleh bicara dan tidak ikut memilih. Boleh dilewati.'},
  judge:{n:'Hakim',e:'⚖️',d:'Sekali per permainan, batalkan hasil voting sehingga pemain yang akan dieksekusi selamat.'},
@@ -773,14 +774,15 @@ const ROLES={
  elder:{n:'Tetua',e:'🧓',d:'Selamat dari satu serangan werewolf. Jika dieksekusi lewat voting, semua peran khusus warga kehilangan kekuatan.'},
  mimic:{n:'Peniru',e:'🪞',d:'Malam pertama, pilih satu pemain untuk ditiru. Saat dia gugur, kamu mewarisi perannya.'},
  thief:{n:'Pencuri',e:'🎒',d:'Malam pertama, curi peran satu pemain. Dia menjadi Warga Desa, kamu mewarisi perannya mulai malam berikutnya.'},
+ angel:{n:'Malaikat',e:'😇',d:'Tanpa kemampuan. Jika dibunuh werewolf, di malam berikutnya werewolf kehilangan kemampuan membunuh selama satu malam. Jika dieksekusi lewat voting, werewolf langsung menang. Seer melihatmu sebagai werewolf (jenisnya sesuai peran werewolf yang disediakan host). Di mode Peran Ganda, tidak bisa digabung dengan Werewolf, Pengkhianat, atau Badut.'},
  hunter:{n:'Hunter',e:'🏹',d:'Saat gugur, kamu menembak satu pemain untuk ikut mati.'},
  witch:{n:'Penyihir',e:'🧪',d:'Punya satu ramuan penyembuh dan satu racun, masing-masing sekali pakai.'},
  vill:{n:'Warga Desa',e:'🏠',d:'Tanpa kekuatan khusus. Senjatamu: gelagat dan suara saat voting.'}};
-const ORDER=['wolf','wseer','traitor','seer','doc','guard','gate','hush','judge','elder','mimic','thief','jester','hunter','witch','vill'];
-const KJ={wolf:'狼',seer:'占',doc:'医',guard:'護',gate:'鎖',wseer:'眼',traitor:'裏',hush:'黙',judge:'裁',elder:'老',mimic:'写',thief:'盗',jester:'丑',hunter:'猟',witch:'魔',vill:'民'};
+const ORDER=['wolf','wseer','alpha','traitor','seer','doc','guard','gate','hush','judge','elder','angel','mimic','thief','jester','hunter','witch','vill'];
+const KJ={wolf:'狼',seer:'占',doc:'医',guard:'護',gate:'鎖',wseer:'眼',alpha:'王',traitor:'裏',hush:'黙',judge:'裁',elder:'老',angel:'天',mimic:'写',thief:'盗',jester:'丑',hunter:'猟',witch:'魔',vill:'民'};
 const avb=p=>`<div class="avbig" style="--h:${p.id*47}">${esc(p.name[0].toUpperCase())}</div>`;
 const hdr=r=>(setTint(r),`<div class="rh r-${r}"><div class="med">${ROLES[r].e}</div><div><h3>${ROLES[r].n}</h3><small>${ROLES[r].d}</small></div></div>`);
-const balance=N=>{const wolf=Math.max(1,Math.round(N/4)),seer=N>=5?1:0,doc=N>=6?1:0,hunter=N>=8?1:0,witch=N>=9?1:0,guard=N>=10?1:0,gate=N>=12?1:0;return{wolf,wseer:0,traitor:0,seer,doc,guard,gate,hush:0,judge:0,elder:0,mimic:0,thief:0,jester:0,hunter,witch,vill:N-wolf-seer-doc-guard-gate-hunter-witch}};
+const balance=N=>{const wolf=Math.max(1,Math.round(N/4)),seer=N>=5?1:0,doc=N>=6?1:0,hunter=N>=8?1:0,witch=N>=9?1:0,guard=N>=10?1:0,gate=N>=12?1:0;return{wolf,wseer:0,alpha:0,traitor:0,seer,doc,guard,gate,hush:0,judge:0,elder:0,angel:0,mimic:0,thief:0,jester:0,hunter,witch,vill:N-wolf-seer-doc-guard-gate-hunter-witch}};
 const EN=new Set('james john michael david robert william richard joseph thomas charles daniel matthew anthony mark paul steven andrew kevin brian george edward jason jacob ryan eric jonathan justin brandon nathan adam henry peter alex alexander ben benjamin sam samuel tom tim jack luke oliver harry jim joe bob bill mike dan chris christopher nick nicholas tony steve jeff jeremy tyler aaron kyle patrick scott sean simon stephen victor vincent lucas liam noah ethan mason logan mary jennifer linda elizabeth barbara susan jessica sarah karen nancy lisa emma olivia sophia emily anna jane kate katie lily grace hannah rachel laura amy helen alice julia chloe ella mia zoe claire jenny jessie john jonah josh joshua jordan jake jay max leo ian ivan evan eli noel neil ray roy ron rick ricky ted terry troy walter wayne zack zach'.split(' '));
 const detect=n=>{const f=String(n).trim().toLowerCase().split(/\s+/)[0];return EN.has(f)||/th|ph|sh|ck|ough|ee|oo/.test(f)?'en':'id'};
 let S={names:Array.from({length:6},(_,i)=>'Pemain '+(i+1)),cnt:balance(6),min:3,reveal:true,voice:true,seerFull:false,sfx:true,hap:true,seerTraitor:false,wolfSkip:true,theme:'darah',lite:false,table:true};
@@ -825,7 +827,7 @@ function pick({r,t,h,c,max=1,min=1,skip}){return new Promise(res=>{setPriv(true)
 function setup(q){
   G=null;setTheme('night');setBgGojo(false);label('Pengaturan');board();
   const N=S.names.length,tot=Object.values(S.cnt).reduce((a,b)=>a+b,0);
-  const err=N<4?'Minimal 4 pemain.':tot!==(S.dual?2*N:N)?`Jumlah peran ${tot}, jumlah ${S.dual?'kartu':'pemain'} ${S.dual?2*N:N}${S.dual?' (tiap pemain 2 kartu)':''}. Samakan angkanya.`:S.cnt.wolf+S.cnt.wseer<1?'Minimal 1 werewolf (Werewolf atau Werewolf Pengintai).':(S.cnt.wolf+S.cnt.wseer+S.cnt.traitor)>=N-(S.cnt.wolf+S.cnt.wseer+S.cnt.traitor)?'Pihak werewolf terlalu banyak: permainan langsung selesai.':(S.dual&&Math.max(...Object.values(S.cnt))>N)?`Satu peran maksimal ${N} kartu, karena tiap pemain harus dapat dua peran berbeda.`:(S.dual&&S.cnt.wolf+S.cnt.wseer+S.cnt.traitor>N)?`Peran berpihak (Werewolf, Werewolf Pengintai, Pengkhianat) maksimal ${N}, karena satu pemain hanya boleh satu peran berpihak. Badut boleh digabung dengan salah satunya.`:'';
+  const err=N<4?'Minimal 4 pemain.':tot!==(S.dual?2*N:N)?`Jumlah peran ${tot}, jumlah ${S.dual?'kartu':'pemain'} ${S.dual?2*N:N}${S.dual?' (tiap pemain 2 kartu)':''}. Samakan angkanya.`:S.cnt.wolf+S.cnt.wseer+S.cnt.alpha<1?'Minimal 1 werewolf (Werewolf, Werewolf Pengintai, atau Alpha Werewolf).':(S.cnt.wolf+S.cnt.wseer+S.cnt.alpha+S.cnt.traitor)>=N-(S.cnt.wolf+S.cnt.wseer+S.cnt.alpha+S.cnt.traitor)?'Pihak werewolf terlalu banyak: permainan langsung selesai.':(S.dual&&Math.max(...Object.values(S.cnt))>N)?`Satu peran maksimal ${N} kartu, karena tiap pemain harus dapat dua peran berbeda.`:(S.dual&&S.cnt.wolf+S.cnt.wseer+S.cnt.alpha+S.cnt.traitor>N)?`Peran berpihak (Werewolf, Werewolf Pengintai, Alpha Werewolf, Pengkhianat) maksimal ${N}, karena satu pemain hanya boleh satu peran berpihak. Badut boleh digabung dengan salah satunya.`:(S.dual&&S.cnt.angel>tot-S.cnt.angel-(S.cnt.wolf+S.cnt.wseer+S.cnt.alpha+S.cnt.traitor+S.cnt.jester))?`Malaikat tidak bisa digabung dengan Werewolf, Werewolf Pengintai, Alpha Werewolf, Pengkhianat, atau Badut. Jumlah peran biasa (selain Malaikat dan peran berpihak) harus minimal sebanyak Malaikat.`:'';
   const s=$('#scr');
   s.classList.toggle('st',!!q);
   s.innerHTML=`<div class="hero2"><div class="lr"><img src="${LOGO}" alt="Logo Karang Taruna Naga Baru"></div><b>Karang Taruna Naga Baru</b><small>Perumahan Pedurungan Baru</small><span class="jp">人狼</span></div><p class="mute">Satu HP diedarkan antar pemain. Saat malam, tiap pemain menjalankan tugas perannya sendiri secara rahasia, tanpa dipanggil narator.</p>
@@ -837,7 +839,7 @@ function setup(q){
   <div class="dist">${ORDER.filter(k=>S.cnt[k]>0).map(k=>`<span class="r-${k}" style="flex:${S.cnt[k]}">${ROLES[k].e} ${S.cnt[k]}</span>`).join('')}</div><div id="chk" class="${err?'bad':''}">${err||(S.dual?`Peran cocok: ${2*N} kartu untuk ${N} pemain (tiap pemain 2 kartu).`:`Peran cocok dengan jumlah pemain (${N}).`)}</div>
   <button class="ghost" data-a="auto">Atur peran otomatis untuk ${N} pemain</button>
   <h3 class="sp">Mode tambahan</h3>
-  <label class="tg"><input type="checkbox" id="dm" ${S.dual?'checked':''}> Mode Peran Ganda: tiap pemain mendapat 2 kartu peran yang berbeda, dibagikan acak dari daftar peran moderator di atas (jumlah peran harus 2 kali jumlah pemain). Peran berpihak (Werewolf, Pengkhianat, Badut) menentukan tim dan cara menang, dan satu pemain hanya boleh memegang satu dari Werewolf, Pengkhianat, atau Badut, kecuali Badut yang boleh digabung dengan Werewolf atau Pengkhianat (jika digabung, pemain itu tetap bermain sebagai timnya dan Badut tidak bisa menang). Matikan untuk permainan biasa.</label>
+  <label class="tg"><input type="checkbox" id="dm" ${S.dual?'checked':''}> Mode Peran Ganda: tiap pemain mendapat 2 kartu peran yang berbeda, dibagikan acak dari daftar peran moderator di atas (jumlah peran harus 2 kali jumlah pemain). Peran berpihak (Werewolf, Werewolf Pengintai, Alpha Werewolf, Pengkhianat, Badut) menentukan tim dan cara menang, dan satu pemain hanya boleh memegang satu dari Werewolf, Alpha Werewolf, Pengkhianat, atau Badut, kecuali Badut yang boleh digabung dengan Werewolf atau Pengkhianat (jika digabung, pemain itu tetap bermain sebagai timnya dan Badut tidak bisa menang). Matikan untuk permainan biasa.</label>
   <h3 class="sp">Tampilan</h3>
   <div class="thm">${[['darah','Darah'],['salju','Salju'],['sakura','Sakura']].map(([k,n])=>`<button class="thc${(S.theme||'darah')===k?' on':''}" data-th="${k}" aria-pressed="${(S.theme||'darah')===k}"><i class="sw sw-${k}"></i>${n}</button>`).join('')}</div>
   <label class="tg"><input type="checkbox" id="tb" ${S.table!==false?'checked':''}> Papan meja bundar (matikan untuk kartu potret)</label>
@@ -885,8 +887,8 @@ async function dealRoles(){
     await ui(`${avb(p)}<h2>Serahkan HP ke ${esc(p.name)}</h2><p>Pastikan hanya ${esc(p.name)} yang melihat layar.</p><button class="go" data-v="1">Saya ${esc(p.name)}</button><i data-act="${p.id}" hidden></i>`);
     const rks=rolesOf(p);
     for(let ki=0;ki<rks.length;ki++){const rk=rks[ki];
-    const r=ROLES[rk],mates=(rk==='wolf'||rk==='wseer')?G.ps.filter(x=>isW(x)&&x!==p).map(x=>esc(x.name)):(rk==='traitor'?G.ps.filter(isW).map(x=>esc(x.name)):[]);
-    const pr=ui(`<p data-priv>${G.dual?`<b>Kartu ${ki+1} dari 2.</b> `:''}Ketuk kartu untuk membaliknya. Kartu menutup sendiri setelah 9 detik.</p><button class="card" id="cd" aria-label="Balik kartu peran"><div class="tilt"><div class="in"><div class="face back">影</div><div class="face front r-${rk}"><span class="kj">${KJ[rk]}</span>${ICON[rk]}<b>${r.n}</b><small>${r.d}</small>${mates.length?`<small>${rk==='traitor'?'Werewolf':'Rekanmu'}: <b style="font-size:1rem">${mates.join(', ')}</b></small>`:''}${(rk==='wolf'||rk==='wseer')&&traitorsOf().length?`<small>Pengkhianat: <b style="font-size:1rem">${traitorsOf().join(', ')}</b></small>`:''}<i class="seal">${r.e}</i><i class="holo"></i></div></div></div></button><div class="hb" id="hb"><i></i></div><button class="go" data-v="1" id="hd" hidden>Sembunyikan</button>`);
+    const r=ROLES[rk],mates=WK(rk)?G.ps.filter(x=>isW(x)&&x!==p).map(x=>esc(x.name)):(rk==='traitor'?G.ps.filter(isW).map(x=>esc(x.name)):[]);
+    const pr=ui(`<p data-priv>${G.dual?`<b>Kartu ${ki+1} dari 2.</b> `:''}Ketuk kartu untuk membaliknya. Kartu menutup sendiri setelah 9 detik.</p><button class="card" id="cd" aria-label="Balik kartu peran"><div class="tilt"><div class="in"><div class="face back">影</div><div class="face front r-${rk}"><span class="kj">${KJ[rk]}</span>${ICON[rk]}<b>${r.n}</b><small>${r.d}</small>${mates.length?`<small>${rk==='traitor'?'Werewolf':'Rekanmu'}: <b style="font-size:1rem">${mates.join(', ')}</b></small>`:''}${WK(rk)&&traitorsOf().length?`<small>Pengkhianat: <b style="font-size:1rem">${traitorsOf().join(', ')}</b></small>`:''}<i class="seal">${r.e}</i><i class="holo"></i></div></div></div></button><div class="hb" id="hb"><i></i></div><button class="go" data-v="1" id="hd" hidden>Sembunyikan</button>`);
     $('#cd').onclick=flipCard;
     await pr;
     }
@@ -895,15 +897,18 @@ async function dealRoles(){
 }
 
 /* ---------- Alur permainan ---------- */
-const isW=p=>p.role==='wolf'||p.role==='wseer';
+const WK=k=>k==='wolf'||k==='wseer'||k==='alpha';
+const isW=p=>WK(p.role);
+/* Malaikat tampil di mata Seer sebagai salah satu jenis werewolf yang disediakan host (dipilih acak sekali, lalu tetap) */
+const fakeOf=p=>{if(!p.fake){const wt=['wolf','wseer','alpha'].filter(k=>S.cnt[k]>0);p.fake=shuffle(wt)[0]||'wolf'}return p.fake};
 const teamNote=()=>{
   if(!G||G.act==null)return'';
   const pl=G.ps[G.act];if(!pl)return'';
   const r0=pl.role,fm=x=>esc(x.name)+(x.alive?'':' (gugur)');
-  const ws=G.ps.filter(x=>x!==pl&&(x.role==='wolf'||x.role==='wseer')),ts=G.ps.filter(x=>x!==pl&&x.role==='traitor');
+  const ws=G.ps.filter(x=>x!==pl&&WK(x.role)),ts=G.ps.filter(x=>x!==pl&&x.role==='traitor');
   let rows=[];
-  if(r0==='wolf'||r0==='wseer'){rows.push(['Rekan werewolf',ws]);rows.push(['Pengkhianat',ts])}
-  else if(r0==='traitor'){rows.push(['Tim werewolf',G.ps.filter(x=>x.role==='wolf'||x.role==='wseer')]);rows.push(['Sesama pengkhianat',ts])}
+  if(WK(r0)){rows.push(['Rekan werewolf',ws]);rows.push(['Pengkhianat',ts])}
+  else if(r0==='traitor'){rows.push(['Tim werewolf',G.ps.filter(x=>WK(x.role))]);rows.push(['Sesama pengkhianat',ts])}
   rows=rows.filter(([,l])=>l.length);
   if(!rows.length)return'';
   return `<div class="team" style="margin:.55rem 0;padding:.55rem .8rem;border-left:3px solid #ff5c7a;background:rgba(255,255,255,.06);border-radius:6px;font-size:.95rem;line-height:1.5">${rows.map(([t,l])=>`<div>👥 ${t}: <b>${l.map(fm).join(', ')}</b></div>`).join('')}</div>`;
@@ -915,15 +920,17 @@ const uget=(p,r)=>p.us?p.us[r]:p.used;
 const uset=(p,r)=>{if(p.us)p.us[r]=true;else p.used=true};
 const jU=q=>uget(q,'judge');
 const jS=q=>uset(q,'judge');
-const ALIGN={wolf:3,wseer:3,traitor:2,jester:1};
+const ALIGN={wolf:3,wseer:3,alpha:3,traitor:2,jester:1};
 const alg=r=>ALIGN[r]||0;
+/* Malaikat tidak boleh satu pemain dengan peran berpihak (Werewolf, Pengkhianat, Badut): kartu Malaikat diganti Warga Desa */
+const fixAngel=p=>{if(!p.r2)return;const k=p.role==='angel'?'role':p.r2==='angel'?'r2':null;if(!k)return;const o=k==='role'?p.r2:p.role;if(alg(o)>0){p[k]='vill';if(p.us)p.us.vill=false}};
 const fixPrimary=p=>{if(p.r2&&alg(p.r2)>alg(p.role)){const t=p.role;p.role=p.r2;p.r2=t}};
 const hasR=(p,r)=>p.role===r||p.r2===r;
 const rn=p=>p.r2?ROLES[p.role].n+' + '+ROLES[p.r2].n:ROLES[p.role].n;
 const re=p=>p.r2?ROLES[p.role].e+ROLES[p.r2].e:ROLES[p.role].e;
 const r2html=p=>p.r2?`<small class="r2"><b>Peran kedua: ${ROLES[p.r2].e} ${ROLES[p.r2].n}</b>${ROLES[p.r2].d}</small>`:'';
 async function asRole(p,r,fn){const o=p.role;p.pr0=o;p.role=r;try{return await fn()}finally{p.role=o;p.pr0=null}}
-const okPair=(a,b)=>a!==b&&!(alg(a)&&alg(b)&&a!=='jester'&&b!=='jester');
+const okPair=(a,b)=>a!==b&&!(alg(a)&&alg(b)&&a!=='jester'&&b!=='jester')&&!(a==='angel'&&alg(b))&&!(b==='angel'&&alg(a));
 function dealDual(cards){
   const n=cards.length/2;
   for(let t=0;t<300;t++){
@@ -963,11 +970,15 @@ function toggleDual(on){
 }
 const SPECIAL_V=new Set(['seer','doc','guard','gate','hush','judge','mimic','thief','hunter','witch']);
 const cur=p=>!!(G&&G.curse&&SPECIAL_V.has(p.role));
-const winner=()=>{if(G&&G.jester!=null)return 'jester';const a=alive(),w=a.filter(isW).length,t=a.filter(p=>p.role==='traitor').length,s=w+t;return !w?'vill':s>=a.length-s?'wolf':null};
+const winner=()=>{if(G&&G.jester!=null)return 'jester';if(G&&G.angelWin)return 'wolf';const a=alive(),w=a.filter(isW).length,t=a.filter(p=>p.role==='traitor').length,s=w+t;return !w?'vill':s>=a.length-s?'wolf':null};
 const roleNote=(p,msg)=>{const r=ROLES[p.role],ms=isW(p)?G.ps.filter(x=>isW(x)&&x!==p).map(x=>esc(x.name)):(p.role==='traitor'?G.ps.filter(isW).map(x=>esc(x.name)):[]);
   return `<i data-priv data-keep hidden></i><h3>${msg}</h3><div class="rh r-${p.role}"><div class="med">${r.e}</div><div><b>${r.n}</b><small>${r.d}</small>${r2html(p)}${ms.length?`<small>${p.role==='traitor'?'Werewolf':'Rekanmu'}: <b>${ms.join(', ')}</b></small>`:''}${isW(p)&&traitorsOf().length?`<small>Pengkhianat: <b>${traitorsOf().join(', ')}</b></small>`:''}</div></div><button class="go" data-v="1">Mengerti</button>`};
 function mimicCheck(){G.ps.forEach(p=>{if(p.alive&&hasR(p,'mimic')&&p.mt!=null&&!G.ps[p.mt].alive){const tr=G.ps[p.mt].role;if(tr==='mimic')return;p[p.role==='mimic'?'role':'r2']=tr;if(p.us)p.us[tr]=false;else p.used=false;fixPrimary(p);p.note=roleNote(p,'🪞 Kamu mewarisi peran yang kamu tiru');G.log.push({d:G.day,t:'mimicgo',by:p.id,r:tr})}})}
 const muteNote=()=>{const m=(G.mutes||[]).map(i=>G.ps[i]).filter(p=>p.alive);return m.length?`<p class="death">🤫 Dibungkam hari ini: <b>${m.map(p=>esc(p.name)).join(', ')}</b>. Tidak boleh bicara dan tidak ikut memilih.</p>`:''};
+function pickOpt(t,sub,btn,items){return new Promise(res=>{setPriv(true);const s=$('#scr');s.onclick=null;let sel=null;
+  s.innerHTML=`<h3>${t}</h3>${teamNote()}<p>${sub}</p><div class="chips">${items.map(o=>`<button class="chip" data-k="${o.k}">${o.l}</button>`).join('')}</div><div class="bar"><button class="go" id="ok" disabled>${btn}</button></div>`;
+  const ok=$('#ok');s.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{sel=b.dataset.k;s.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===b));ok.disabled=false});
+  ok.onclick=()=>res(sel)})}
 function pickRole(t,list){return new Promise(res=>{setPriv(true);const s=$('#scr');s.onclick=null;let sel=null;
   s.innerHTML=`<h3>${t}</h3><p>Pilih satu peran.</p><div class="chips">${list.map(k=>`<button class="chip" data-k="${k}">${ROLES[k].e} ${ROLES[k].n}</button>`).join('')}</div><div class="bar"><button class="go" id="ok" disabled>Konfirmasi tebakan</button></div>`;
   const ok=$('#ok');s.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{sel=b.dataset.k;s.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===b));ok.disabled=false});
@@ -1003,7 +1014,7 @@ async function night(){
   const al=alive(),wv=[],wl=[];let prot=[],heal=false,pois=[],protBy=[],healBy=null,poisBy=null;
   const hand=async p=>{speak([nm(p)]);const hr=await ui(`${avb(p)}<h2>Serahkan HP ke ${esc(p.name)}</h2><p>Pastikan hanya ${esc(p.name)} yang melihat layar.</p><button class="go" data-v="1">Saya ${esc(p.name)}</button><i data-act="${p.id}" hidden></i>`);if(p.note){const n=p.note;p.note=null;await ui(n)}return hr};
   const decoy=p=>pick({r:p.role,t:'Malam hari',h:'Kamu tidak punya kemampuan untuk giliran ini. Ketuk salah satu nama agar tidak ketahuan, lalu konfirmasi.',c:al.filter(x=>x!==p),max:1,min:1});
-  G.mutes=[];const locked=new Set(),guards=[],mutes=[],steals=[],xk=[];
+  const nb=G.angelBlock===G.day;if(nb)G.log.push({d:G.day,t:'angelblock'});G.mutes=[];const locked=new Set(),guards=[],mutes=[],steals=[],xk=[],alphas=[];
   const lockedMsg=p=>pick({r:p.role,t:'Malam hari',h:'🔒 Kemampuanmu dikunci Penjaga Gerbang malam ini. Ketuk salah satu nama agar tidak ketahuan, lalu konfirmasi.',c:al.filter(x=>x!==p),max:1,min:1});
   if(G.has.has('gate')){
     speak('Ronde penguncian. HP diedarkan.');
@@ -1024,7 +1035,7 @@ async function night(){
   for(const p of al){
     await hand(p);
     for(const rr_ of rolesOf(p))await asRole(p,rr_,async()=>{
-    if(locked.has(p.id)&&['wolf','wseer','seer','doc','guard','hush','mimic','thief'].includes(p.role)){await lockedMsg(p)}
+    if(locked.has(p.id)&&['wolf','wseer','alpha','seer','doc','guard','hush','mimic','thief'].includes(p.role)){await lockedMsg(p)}
     else if(cur(p)){await decoy(p)}
     else if(p.role==='hush'){
       const [id]=await pick({r:'hush',t:'Pembisik',h:'Bungkam satu pemain: besok dia tidak boleh bicara dan tidak ikut memilih. Tidak bisa membungkam diri sendiri. Boleh dilewati.',c:al.filter(x=>x!==p),max:1,min:1,skip:'Lewati (tidak membungkam)'});
@@ -1038,6 +1049,8 @@ async function night(){
     }else if(p.role==='guard'){
       const [id]=await pick({r:'guard',t:'Bodyguard',h:'Pilih siapa yang kamu jaga malam ini. Jika dia diserang werewolf, kamu yang gugur menggantikannya. Tidak bisa menjaga diri sendiri. Boleh dilewati.',c:al.filter(x=>x!==p),max:1,min:1,skip:'Lewati (tidak menjaga)'});
       if(id!==undefined)guards.push([p.id,id]);
+    }else if(isW(p)&&nb){
+      await pick({r:p.role,t:'Malam hari',h:'😇 Malaikat gugur dibunuh werewolf. Malam ini kemampuan membunuh werewolf hilang. Ketuk salah satu nama agar tidak ketahuan, lalu konfirmasi.',c:al.filter(x=>!isW(x)),max:1,min:1});
     }else if(isW(p)){
       const info=(wl.length?`Pilihan rekanmu: ${wl.map(([n,t])=>`${esc(n)} ➜ ${esc(t)}`).join(', ')}. `:'');
       const [id]=await pick({r:p.role,t:ROLES[p.role].n,h:`${info}Pilih korban malam ini${S.wolfSkip!==false?', atau lewati jika tidak ingin membunuh':''}. Jika pilihan werewolf berbeda, suara terbanyak menang${S.wolfSkip!==false?' (lewati juga dihitung sebagai satu suara)':''}.`,c:al.filter(x=>!isW(x)),max:1,min:1,skip:S.wolfSkip!==false?'Lewati (tidak membunuh)':undefined});
@@ -1045,10 +1058,23 @@ async function night(){
       if(p.role==='wseer'&&!p.used){
         const [tg]=await pick({t:'Werewolf Pengintai',h:'Kemampuan sekali pakai: tebak peran satu pemain. Jika benar, dia gugur malam ini. Jika memilih lewati, kemampuan tetap tersimpan.',c:al.filter(x=>!isW(x)),max:1,min:1,skip:'Lewati (simpan kemampuan)'});
         if(tg!==undefined){
-          const gl=ORDER.filter(k=>k!=='wolf'&&k!=='wseer'&&G.has.has(k)),rl=await pickRole(`Tebak peran ${esc(G.ps[tg].name)}`,gl);
+          const gl=ORDER.filter(k=>!WK(k)&&G.has.has(k)),rl=await pickRole(`Tebak peran ${esc(G.ps[tg].name)}`,gl);
           p.used=true;const okg=hasR(G.ps[tg],rl);if(okg)xk.push(tg);
           G.log.push({d:G.day,t:'wguess',by:p.id,v:tg,g:rl,ok:okg});
           await ui(`<i data-priv data-keep hidden></i><h3>🔮 Hasil tebakan</h3><div class="rh ${okg?'r-wolf':'r-doc'}"><div class="med">${okg?'🎯':'❌'}</div><div><b>${esc(G.ps[tg].name)}</b><h3>${okg?'Tebakan benar: dia akan gugur malam ini':'Tebakan salah'}</h3></div></div><button class="go" data-v="1">Saya sudah lihat</button>`);
+        }
+      }
+      if(p.role==='alpha'&&G.day===1&&!p.used){
+        const cand=al.filter(x=>x!==p&&!isW(x)&&x.role!=='traitor');
+        if(cand.length){
+          const [tg]=await pick({t:'Alpha Werewolf',h:'Kemampuan sekali pakai, hanya malam pertama: tunjuk satu pemain lalu ubah kartunya menjadi Werewolf atau Pengkhianat. Perubahan berlaku setelah malam pertama berakhir, dan dia baru diberi tahu di malam berikutnya. Boleh dilewati.',c:cand,max:1,min:1,skip:'Lewati (tidak mengubah)'});
+          if(tg!==undefined){
+            const T=G.ps[tg];
+            const to=await pickOpt(`Ubah ${esc(T.name)} menjadi apa?`,'Pilih kartu baru untuknya.','Konfirmasi',[{k:'wolf',l:`${ROLES.wolf.e} ${ROLES.wolf.n}`},{k:'traitor',l:`${ROLES.traitor.e} ${ROLES.traitor.n}`}]);
+            let slot=0;
+            if(T.r2)slot=+(await pickOpt(`Kartu mana milik ${esc(T.name)} yang diubah?`,'Dia punya dua kartu peran. Pilih salah satu: kartu yang kamu pilih akan diganti, kartu lainnya tetap.','Konfirmasi',[{k:'0',l:'Kartu pertama'},{k:'1',l:'Kartu kedua'}]));
+            p.used=true;alphas.push([p.id,tg,to,slot]);
+          }
         }
       }
     }else if(p.role==='doc'){
@@ -1056,9 +1082,12 @@ async function night(){
       prot.push(id);protBy.push([p.id,id]);
     }else if(p.role==='seer'){
       const [id]=await pick({r:'seer',t:'Seer',h:'Pilih siapa yang ingin kamu periksa.',c:al.filter(x=>x!==p),max:1,min:1});
-      const t=G.ps[id];G.log.push({d:G.day,t:'seer',by:p.id,v:id,wolf:isW(t)});
-      const rr=S.seerFull?((t.role==='traitor'&&!S.seerTraitor)||t.role==='jester'?'vill':t.role):(isW(t)?'wolf':null);
-      await ui(`<i data-priv data-keep hidden></i><h3>🔮 Hasil penglihatan</h3>${rr?`<div class="rh r-${rr}"><div class="med">${ROLES[rr].e}</div><div><b>${esc(t.name)}</b><h3>${ROLES[rr].n}${t.r2?' + '+ROLES[t.r2].n:''}</h3></div></div>`:`<div class="rh r-doc"><div class="med">✅</div><div><b>${esc(t.name)}</b><h3>Bukan werewolf</h3></div></div>`}<button class="go" data-v="1">Saya sudah lihat</button>`);
+      const t=G.ps[id];G.log.push({d:G.day,t:'seer',by:p.id,v:id,wolf:isW(t)||hasR(t,'angel')});
+      const ang=hasR(t,'angel'),mp=k=>(k==='traitor'&&!S.seerTraitor)||k==='jester'?'vill':k;
+      const oth=ang?(t.role==='angel'?t.r2:t.role):t.r2;
+      const rr=ang?(S.seerFull?fakeOf(t):(fakeOf(t)==='alpha'?'alpha':'wolf')):(S.seerFull?mp(t.role):(isW(t)?(t.role==='alpha'?'alpha':'wolf'):null));
+      const sec=oth&&rr?' + '+ROLES[ang&&S.seerFull?mp(oth):oth].n:'';
+      await ui(`<i data-priv data-keep hidden></i><h3>🔮 Hasil penglihatan</h3>${rr?`<div class="rh r-${rr}"><div class="med">${ROLES[rr].e}</div><div><b>${esc(t.name)}</b><h3>${ROLES[rr].n}${sec}</h3></div></div>`:`<div class="rh r-doc"><div class="med">✅</div><div><b>${esc(t.name)}</b><h3>Bukan werewolf</h3></div></div>`}<button class="go" data-v="1">Saya sudah lihat</button>`);
     }else await decoy(p);
     });
   }
@@ -1080,11 +1109,26 @@ async function night(){
     }
   }
   const dead=new Set();
-  let eld=null;
-  if(victim!==null&&!prot.includes(victim)&&!heal){const vp=G.ps[victim];if(hasR(vp,'elder')&&!uget(vp,'elder')){uset(vp,'elder');eld=victim}else dead.add(victim)}
+  let eld=null,angelDie=false;
+  if(victim!==null&&!prot.includes(victim)&&!heal){const vp=G.ps[victim];if(hasR(vp,'elder')&&!uget(vp,'elder')){uset(vp,'elder');eld=victim}else{dead.add(victim);if(hasR(vp,'angel'))angelDie=true}}
   pois.forEach(i=>dead.add(i));
-  xk.forEach(i=>{if(G.ps[i].alive)dead.add(i)});
+  xk.forEach(i=>{if(G.ps[i].alive){dead.add(i);if(hasR(G.ps[i],'angel'))angelDie=true}});
+  if(angelDie){G.angelBlock=G.day+1;G.log.push({d:G.day,t:'angel'})}
   for(const [a,b] of steals){const th=G.ps[a],vc=G.ps[b];if(th.alive&&vc.alive&&hasR(th,'thief')&&!dead.has(a)&&!dead.has(b)){const r=vc.role;th[th.role==='thief'?'role':'r2']=r;vc.role='vill';if(th.us){th.us[r]=false;vc.us.vill=false}else{th.used=false;vc.used=false}fixPrimary(th);th.note=roleNote(th,'🎒 Kamu berhasil mencuri peran!');vc.note=roleNote(vc,'🎒 Perananmu dicuri! Kini kamu Warga Desa.');G.log.push({d:G.day,t:'steal',by:a,v:b,r})}}
+  for(const [a,b,to,slot] of alphas){const ap=G.ps[a],vc=G.ps[b];
+    if(ap.alive&&!dead.has(a)&&hasR(ap,'alpha')){
+      if(vc.alive&&!dead.has(b)&&!isW(vc)&&vc.role!=='traitor'){
+        let sk=(slot===1&&vc.r2)?'r2':'role';if(vc.r2){const ak=vc.role==='angel'?'role':vc.r2==='angel'?'r2':null;if(ak)sk=ak}const old=vc[sk];
+        vc[sk]=to;if(vc.us)vc.us[to]=false;else vc.used=false;fixPrimary(vc);fixAngel(vc);G.has.add(to);
+        vc.note=roleNote(vc,'👑 Alpha Werewolf mengubah kartumu!');
+        ap.note=`<i data-priv data-keep hidden></i><h3>👑 Perubahan berhasil</h3><p><b>${esc(vc.name)}</b> kini ${ROLES[to].n}. Dia akan diberi tahu di malam berikutnya.</p><button class="go" data-v="1">Mengerti</button>`;
+        G.log.push({d:G.day,t:'alpha',by:a,v:b,r:to,o:old,ok:true});
+      }else{
+        ap.note=`<i data-priv data-keep hidden></i><h3>👑 Perubahan gagal</h3><p>Targetmu gugur malam ini atau tidak bisa diubah.</p><button class="go" data-v="1">Mengerti</button>`;
+        G.log.push({d:G.day,t:'alpha',by:a,v:b,r:to,ok:false});
+      }
+    }
+  }
   G.mutes=mutes;
   G.pending=[...dead];G.log.push({d:G.day,t:'night',kill,victim,gd,eld,saved:protBy.filter(x=>x[1]===victim).map(x=>x[0]),heal,healBy,pois:[...pois],poisBy,dead:[...dead]});
 }
@@ -1180,9 +1224,10 @@ async function vote(){
     if(cancel!==null){G.log.push({d:G.day,t:'judge',by:cancel,v:tp.id});speak('Hakim membatalkan eksekusi.');
       await ui(`<h2>⚖️ Hakim bersuara</h2><p>Seorang Hakim membatalkan hukuman. <b>${esc(tp.name)}</b> selamat dan tidak ada yang dieksekusi hari ini.</p><button class="go" data-v="1">Lanjut ke malam</button>`);return false}
    }}
-  const p=top[0];p.alive=false;if(p.role==='jester')G.jester=p.id;G.log.push({d:G.day,t:'vote',v:p.id,n:mx});board();speak([nm(p),'dieksekusi.']);
+  const p=top[0];p.alive=false;if(p.role==='jester')G.jester=p.id;if(hasR(p,'angel')){G.angelWin=true;G.log.push({d:G.day,t:'angelvote',v:p.id})}G.log.push({d:G.day,t:'vote',v:p.id,n:mx});board();speak([nm(p),'dieksekusi.']);
   await deathFx(p,'vote');await ui(`<h2>⚖️ Hasil voting</h2><div class="rh ${S.reveal?'r-'+p.role:'r-wolf'}"><div class="med">${S.reveal?re(p):'⚖️'}</div><div><b>${esc(p.name)}</b><h3>${S.reveal?rn(p):'Dieksekusi'}</h3><small>Dieksekusi dengan ${mx} suara.</small></div></div><button class="go" data-v="1">Lanjut</button>`);
   if(p.role==='jester'){speak('Badut dieksekusi. Badut menang.');await ui(`<h2>🤡 Badut tertawa</h2><p><b>${esc(p.name)}</b> ternyata Badut. Desa terkecoh, dan Badut menang karena berhasil dieksekusi.</p><button class="go" data-v="1">Lanjut</button>`)}
+  if(G.angelWin&&hasR(p,'angel')){speak('Malaikat dieksekusi. Werewolf menang.');await ui(`<h2>😇 Malaikat gugur</h2><p><b>${esc(p.name)}</b> ternyata Malaikat. Desa mengeksekusinya, dan werewolf langsung menang.</p><button class="go" data-v="1">Lanjut</button>`)}
   if(hasR(p,'elder')){G.curse=true;speak('Tetua gugur. Peran khusus warga kehilangan kekuatan.');await ui(`<h2>🧓 Tetua gugur</h2><p>Kutukan Tetua jatuh ke desa: semua peran khusus warga kehilangan kemampuan mulai sekarang.</p><button class="go" data-v="1">Lanjut</button>`)}
   await shots([p]);mimicCheck();
   return !!winner();
@@ -1328,6 +1373,8 @@ const ICON={
   guard:'<svg class="ri2" viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M50 6 L88 20 V50 Q88 78 50 94 Q12 78 12 50 V20 Z"/><path fill="var(--rc)" d="M50 20 L75 29 V50 Q75 68 50 81 Z"/></svg>',
   gate:'<svg class="ri2" viewBox="0 0 100 100" aria-hidden="true"><path d="M30 44 V32 Q30 10 50 10 Q70 10 70 32 V44" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round"/><rect x="18" y="42" width="64" height="50" rx="6" fill="currentColor"/><circle cx="50" cy="62" r="8" fill="var(--rc)"/><rect x="46" y="64" width="8" height="16" fill="var(--rc)"/></svg>',
   wseer:'<svg class="ri2" viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M14 8 L40 30 Q50 27 60 30 L86 8 L88 46 Q90 70 70 84 L58 90 L50 98 L42 90 L30 84 Q10 70 12 46 Z"/><path fill="var(--cut,#e9e2cc)" d="M26 52 Q50 34 74 52 Q50 68 26 52Z"/><circle cx="50" cy="52" r="8" fill="var(--rc)"/></svg>',
+  angel:'<svg class="ri2" viewBox="0 0 100 100" aria-hidden="true"><ellipse cx="50" cy="14" rx="19" ry="7" fill="none" stroke="var(--rc)" stroke-width="6"/><circle cx="50" cy="42" r="16" fill="currentColor"/><path fill="currentColor" d="M36 50 Q6 38 2 78 Q22 66 36 78 Z M64 50 Q94 38 98 78 Q78 66 64 78 Z"/><path fill="currentColor" d="M38 62 H62 L68 98 H32 Z"/></svg>',
+  alpha:'<svg class="ri2" viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M14 22 L40 40 Q50 37 60 40 L86 22 L88 52 Q90 74 70 86 L58 91 L50 98 L42 91 L30 86 Q10 74 12 52 Z"/><path fill="currentColor" d="M26 20 L34 2 L42 14 L50 0 L58 14 L66 2 L74 20 Z"/><path fill="var(--cut,#e9e2cc)" d="M26 58 L44 62 L40 70 Z M74 58 L56 62 L60 70 Z M46 80 L54 80 L50 88 Z"/><path fill="var(--rc)" d="M28 59 L40 62 L38 66 Z M72 59 L60 62 L62 66 Z"/></svg>',
   traitor:'<svg class="ri2" viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M12 22 Q50 6 88 22 V52 Q88 84 50 94 Q12 84 12 52 Z"/><path fill="var(--rc)" d="M26 40 Q36 34 44 42 Q36 50 26 44 Z M74 40 Q64 34 56 42 Q64 50 74 44 Z"/><path d="M34 70 Q50 78 66 70" stroke="var(--rc)" stroke-width="5" fill="none" stroke-linecap="round"/></svg>',
   hush:'<svg class="ri2" viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M10 18 H90 V66 H56 L34 90 V66 H10 Z"/><path d="M28 42 H72" stroke="var(--rc)" stroke-width="8" stroke-linecap="round"/></svg>',
   jester:'<svg class="ri2" viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M8 62 Q10 30 24 14 Q34 34 50 40 Q66 34 76 14 Q90 30 92 62 Q50 84 8 62Z"/><circle cx="24" cy="12" r="7" fill="var(--rc)"/><circle cx="76" cy="12" r="7" fill="var(--rc)"/><path fill="var(--rc)" d="M12 68 Q50 88 88 68 L84 82 Q50 100 16 82Z"/></svg>',
@@ -1341,7 +1388,7 @@ const ICON={
 };
 
 /* 5. tint per peran */
-const TC={wolf:'#ff2e4f',seer:'#a78bfa',doc:'#4fd1a5',guard:'#5aa9ff',gate:'#d4d4d8',wseer:'#ff3b6b',traitor:'#c05a8f',hush:'#8c9bff',judge:'#f2e94e',jester:'#ff7ad9',elder:'#d9c48f',mimic:'#4dd2d8',thief:'#c8803c',hunter:'#ff9a4d',witch:'#d28bff',vill:'#ffc861'};
+const TC={wolf:'#ff2e4f',seer:'#a78bfa',doc:'#4fd1a5',guard:'#5aa9ff',gate:'#d4d4d8',wseer:'#ff3b6b',alpha:'#ff6a3d',traitor:'#c05a8f',hush:'#8c9bff',judge:'#f2e94e',jester:'#ff7ad9',elder:'#d9c48f',angel:'#f5e6a8',mimic:'#4dd2d8',thief:'#c8803c',hunter:'#ff9a4d',witch:'#d28bff',vill:'#ffc861'};
 function setTint(r){
   const t=$('#tint'),b=document.body;
   if(r&&TC[r]){b.style.setProperty('--tc',TC[r]);b.dataset.tint=r;t.classList.remove('snap');t.classList.add('on')}
@@ -1477,6 +1524,10 @@ async function endShow(w){
     else if(e.t==='mimicgo')add(e.d,`🪞 Peniru ${nameOf(e.by)} mewarisi peran ${ROLES[e.r].n}`);
     else if(e.t==='steal')add(e.d,`🎒 Pencuri ${nameOf(e.by)} mencuri peran ${ROLES[e.r].n} dari <b>${nameOf(e.v)}</b>`);
     else if(e.t==='wguess')add(e.d,`🐺 Werewolf Pengintai ${nameOf(e.by)} menebak <b>${nameOf(e.v)}</b> sebagai ${ROLES[e.g].n}: ${e.ok?'benar':'salah'}`);
+    else if(e.t==='angel')add(e.d,'😇 Malaikat gugur dibunuh werewolf: werewolf tidak bisa membunuh di malam berikutnya');
+    else if(e.t==='angelblock')add(e.d,'🚫 Werewolf tidak bisa membunuh malam ini (efek Malaikat)');
+    else if(e.t==='angelvote')add(e.d,`😇 Malaikat <b>${nameOf(e.v)}</b> dieksekusi: werewolf langsung menang`);
+    else if(e.t==='alpha')add(e.d,e.ok?`👑 Alpha Werewolf ${nameOf(e.by)} mengubah <b>${nameOf(e.v)}</b> menjadi ${ROLES[e.r].n}`:`👑 Alpha Werewolf ${nameOf(e.by)} gagal mengubah <b>${nameOf(e.v)}</b>`);
     else if(e.t==='judge')add(e.d,`⚖️ Hakim ${nameOf(e.by)} membatalkan eksekusi <b>${nameOf(e.v)}</b>`);
     else if(e.t==='lock')add(e.d,`🔒 Penjaga Gerbang ${nameOf(e.by)} mengunci <b>${nameOf(e.v)}</b>`);
     else if(e.t==='seer')add(e.d,`🔮 Seer ${nameOf(e.by)} memeriksa <b>${nameOf(e.v)}</b>: ${e.wolf?'werewolf':'bukan werewolf'}`);
@@ -1487,7 +1538,7 @@ async function endShow(w){
   const tl=Object.keys(day).sort((a,b)=>a-b).map(d=>`<div><div class="d">Hari ke-${d}</div><ul>${day[d].map(x=>`<li>${x}</li>`).join('')}</ul></div>`).join('');
   const cards=ps.map((p,i)=>`<div class="mc r-${p.role}${p.alive?'':' dd'}" style="--i:${i}"><div class="mci"><div class="mcb">影</div><div class="mcf">${ICON[p.role]}<b>${esc(p.name)}</b><small>${rn(p)}</small></div></div></div>`).join('');
   const base=(.5+N*.18+.6).toFixed(2);
-  $('#scr').innerHTML=`<img class="endlogo" src="${LOGO}" alt=""><h2>${w==='wolf'?'🐺 Werewolf menang':w==='jester'?'🤡 Badut menang':'🏠 Warga Desa menang'}</h2><p>${w==='wolf'?'Jumlah werewolf kini menyamai warga yang tersisa.':w==='jester'?'Badut berhasil dieksekusi lewat voting.':'Semua werewolf sudah tersingkir.'}</p><h3 class="sp">Peran terungkap</h3><div class="rv">${cards}</div>${aw.length?`<h3 class="sp endx" style="--dl:${base}s">Gelar malam ini</h3><div class="aws endx" style="--dl:${(+base+.15).toFixed(2)}s">${aw.slice(0,6).map(a=>`<div class="aw"><i>${a[0]}</i><div><small>${a[1]}</small><b>${a[2]}</b><span>${a[3]}</span></div></div>`).join('')}</div>`:''}${tl?`<h3 class="sp endx" style="--dl:${(+base+.3).toFixed(2)}s">Jejak permainan</h3><div class="tlx endx" style="--dl:${(+base+.45).toFixed(2)}s">${tl}</div>`:''}<button class="go big endx" id="again" style="--dl:${(+base+.6).toFixed(2)}s">Main lagi</button>`;
+  $('#scr').innerHTML=`<img class="endlogo" src="${LOGO}" alt=""><h2>${w==='wolf'?'🐺 Werewolf menang':w==='jester'?'🤡 Badut menang':'🏠 Warga Desa menang'}</h2><p>${w==='wolf'?(G.angelWin?'Malaikat dieksekusi lewat voting, jadi werewolf langsung menang.':'Jumlah werewolf kini menyamai warga yang tersisa.'):w==='jester'?'Badut berhasil dieksekusi lewat voting.':'Semua werewolf sudah tersingkir.'}</p><h3 class="sp">Peran terungkap</h3><div class="rv">${cards}</div>${aw.length?`<h3 class="sp endx" style="--dl:${base}s">Gelar malam ini</h3><div class="aws endx" style="--dl:${(+base+.15).toFixed(2)}s">${aw.slice(0,6).map(a=>`<div class="aw"><i>${a[0]}</i><div><small>${a[1]}</small><b>${a[2]}</b><span>${a[3]}</span></div></div>`).join('')}</div>`:''}${tl?`<h3 class="sp endx" style="--dl:${(+base+.3).toFixed(2)}s">Jejak permainan</h3><div class="tlx endx" style="--dl:${(+base+.45).toFixed(2)}s">${tl}</div>`:''}<button class="go big endx" id="again" style="--dl:${(+base+.6).toFixed(2)}s">Main lagi</button>`;
   $('#again').onclick=setup;
   ps.forEach((p,i)=>setTimeout(()=>{if(document.querySelector('.rv'))SFX.flip()},500+i*180+300));
 }
@@ -1607,6 +1658,8 @@ const CS_SVG={
   guard:'<svg class="cs-svg" viewBox="0 0 200 200" aria-hidden="true"><g class="shd"><path d="M100 22 L164 46 V100 Q164 148 100 180 Q36 148 36 100 V46 Z" fill="#17171d" stroke="var(--rc)" stroke-width="5"/><path d="M100 44 L146 60 V100 Q146 134 100 158 Z" fill="var(--rc)" opacity=".85"/></g></svg>',
   gate:'<svg class="cs-svg" viewBox="0 0 200 200" aria-hidden="true"><g class="shk"><path d="M68 92 V64 Q68 34 100 34 Q132 34 132 64 V92" fill="none" stroke="var(--rc)" stroke-width="12" stroke-linecap="round"/></g><rect x="50" y="88" width="100" height="78" rx="10" fill="#17171d" stroke="var(--rc)" stroke-width="5"/><circle cx="100" cy="122" r="11" fill="var(--rc)"/><rect x="95" y="126" width="10" height="24" fill="var(--rc)"/></svg>',
   wseer:'<svg class="cs-svg" viewBox="0 0 200 200" aria-hidden="true"><g class="g"><path d="M28 16 L80 60 Q100 54 120 60 L172 16 L176 92 Q180 140 140 168 L116 180 L100 196 L84 180 L60 168 Q20 140 24 92 Z" fill="#17171d" stroke="var(--rc)" stroke-width="5"/><path d="M52 104 Q100 68 148 104 Q100 136 52 104Z" fill="var(--rc)"/><circle cx="100" cy="104" r="14" fill="#0b0b10"/></g></svg>',
+  angel:'<svg class="cs-svg" viewBox="0 0 200 200" aria-hidden="true"><g class="g"><ellipse cx="100" cy="30" rx="38" ry="12" fill="none" stroke="var(--rc)" stroke-width="8"/><circle cx="100" cy="88" r="30" fill="#17171d" stroke="var(--rc)" stroke-width="5"/><path d="M70 98 Q14 74 8 150 Q44 130 70 148 Z M130 98 Q186 74 192 150 Q156 130 130 148 Z" fill="#17171d" stroke="var(--rc)" stroke-width="5"/><path d="M82 124 H118 L126 188 H74 Z" fill="var(--rc)" opacity=".85"/></g></svg>',
+  alpha:'<svg class="cs-svg" viewBox="0 0 200 200" aria-hidden="true"><g class="g"><path d="M28 48 L80 84 Q100 78 120 84 L172 48 L176 112 Q180 156 140 176 L116 186 L100 198 L84 186 L60 176 Q20 156 24 112 Z" fill="#17171d" stroke="var(--rc)" stroke-width="5"/><path d="M52 40 L66 6 L82 28 L100 0 L118 28 L134 6 L148 40 Z" fill="var(--rc)"/><path d="M52 124 Q100 92 148 124 Q100 156 52 124Z" fill="var(--rc)"/><circle cx="100" cy="124" r="14" fill="#0b0b10"/></g></svg>',
   traitor:'<svg class="cs-svg" viewBox="0 0 200 200" aria-hidden="true"><g class="g"><path d="M24 44 Q100 12 176 44 V104 Q176 168 100 188 Q24 168 24 104 Z" fill="#17171d" stroke="var(--rc)" stroke-width="5"/><path d="M52 80 Q72 68 88 84 Q72 100 52 88 Z M148 80 Q128 68 112 84 Q128 100 148 88 Z" fill="var(--rc)"/><path d="M68 140 Q100 156 132 140" stroke="var(--rc)" stroke-width="8" fill="none" stroke-linecap="round"/></g></svg>',
   hush:'<svg class="cs-svg" viewBox="0 0 200 200" aria-hidden="true"><g class="g"><path d="M20 36 H180 V132 H112 L68 180 V132 H20 Z" fill="#17171d" stroke="var(--rc)" stroke-width="5"/><path d="M56 84 H144" stroke="var(--rc)" stroke-width="12" stroke-linecap="round"/></g></svg>',
   jester:'<svg class="cs-svg" viewBox="0 0 200 200" aria-hidden="true"><g class="g"><path d="M16 124 Q18 62 48 28 Q70 68 100 80 Q130 68 152 28 Q182 62 184 124 Q100 168 16 124Z" fill="#17171d" stroke="var(--rc)" stroke-width="5"/><circle cx="48" cy="24" r="14" fill="var(--rc)"/><circle cx="152" cy="24" r="14" fill="var(--rc)"/><path d="M24 138 Q100 184 176 138" stroke="var(--rc)" stroke-width="12" fill="none" stroke-linecap="round"/></g></svg>',
@@ -1618,7 +1671,7 @@ const CS_SVG={
   wolf:'<svg class="cs-svg" viewBox="0 0 200 200" aria-hidden="true"><g stroke="var(--rc)" stroke-width="9" stroke-linecap="round" fill="none"><path class="cl c1" pathLength="1" d="M50 24 L96 176"/><path class="cl c2" pathLength="1" d="M88 18 L134 170"/><path class="cl c3" pathLength="1" d="M126 24 L172 176"/></g></svg>',
   vill:'<svg class="cs-svg" viewBox="0 0 200 200" aria-hidden="true"><path d="M100 30 L180 98 H162 V170 H38 V98 H20 Z" fill="#17171d" stroke="var(--rc)" stroke-width="4"/><rect class="win" x="78" y="104" width="44" height="40" fill="var(--rc)"/><path d="M100 104 V144 M78 124 H122" stroke="#17171d" stroke-width="4"/></svg>'
 };
-const CS_TXT={wolf:'Cakar menerkam dalam gelap',seer:'Mata ketiga terbuka',doc:'Perlindungan diberikan',guard:'Perisai terangkat',gate:'Gerbang terkunci',wseer:'Mata serigala mengintai',traitor:'Bayangan berpihak pada gelap',hush:'Bisikan membungkam',judge:'Palu keadilan terangkat',jester:'Tawa di tengah kegelapan',elder:'Kebijaksanaan menjaga desa',mimic:'Cermin menatap balik',thief:'Tangan diam-diam bergerak',hunter:'Bidikan terkunci',vill:'Desa terlelap, kamu berjaga'};
+const CS_TXT={wolf:'Cakar menerkam dalam gelap',seer:'Mata ketiga terbuka',doc:'Perlindungan diberikan',guard:'Perisai terangkat',gate:'Gerbang terkunci',wseer:'Mata serigala mengintai',alpha:'Sang pemimpin kawanan memanggil',angel:'Desa terlelap, kamu berjaga',traitor:'Bayangan berpihak pada gelap',hush:'Bisikan membungkam',judge:'Palu keadilan terangkat',jester:'Tawa di tengah kegelapan',elder:'Kebijaksanaan menjaga desa',mimic:'Cermin menatap balik',thief:'Tangan diam-diam bergerak',hunter:'Bidikan terkunci',vill:'Desa terlelap, kamu berjaga'};
 /* suara dan getar HARUS sama untuk semua peran, supaya tidak membocorkan peran lewat telinga */
 const CS_FX=()=>{SFX.hush();buzz(20)};
 async function cutscene(role,res){
