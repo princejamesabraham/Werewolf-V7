@@ -825,7 +825,7 @@ function pick({r,t,h,c,max=1,min=1,skip}){return new Promise(res=>{setPriv(true)
 function setup(q){
   G=null;setTheme('night');setBgGojo(false);label('Pengaturan');board();
   const N=S.names.length,tot=Object.values(S.cnt).reduce((a,b)=>a+b,0);
-  const err=N<4?'Minimal 4 pemain.':tot!==(S.dual?2*N:N)?`Jumlah peran ${tot}, jumlah ${S.dual?'kartu':'pemain'} ${S.dual?2*N:N}${S.dual?' (tiap pemain 2 kartu)':''}. Samakan angkanya.`:S.cnt.wolf+S.cnt.wseer<1?'Minimal 1 werewolf (Werewolf atau Werewolf Pengintai).':(S.cnt.wolf+S.cnt.wseer+S.cnt.traitor)>=N-(S.cnt.wolf+S.cnt.wseer+S.cnt.traitor)?'Pihak werewolf terlalu banyak: permainan langsung selesai.':(S.dual&&Math.max(...Object.values(S.cnt))>N)?`Satu peran maksimal ${N} kartu, karena tiap pemain harus dapat dua peran berbeda.`:(S.dual&&S.cnt.wolf+S.cnt.wseer+S.cnt.traitor+S.cnt.jester>N)?`Peran berpihak (Werewolf, Werewolf Pengintai, Pengkhianat, Badut) maksimal ${N}, karena satu pemain hanya boleh satu peran berpihak.`:'';
+  const err=N<4?'Minimal 4 pemain.':tot!==(S.dual?2*N:N)?`Jumlah peran ${tot}, jumlah ${S.dual?'kartu':'pemain'} ${S.dual?2*N:N}${S.dual?' (tiap pemain 2 kartu)':''}. Samakan angkanya.`:S.cnt.wolf+S.cnt.wseer<1?'Minimal 1 werewolf (Werewolf atau Werewolf Pengintai).':(S.cnt.wolf+S.cnt.wseer+S.cnt.traitor)>=N-(S.cnt.wolf+S.cnt.wseer+S.cnt.traitor)?'Pihak werewolf terlalu banyak: permainan langsung selesai.':(S.dual&&Math.max(...Object.values(S.cnt))>N)?`Satu peran maksimal ${N} kartu, karena tiap pemain harus dapat dua peran berbeda.`:(S.dual&&S.cnt.wolf+S.cnt.wseer+S.cnt.traitor>N)?`Peran berpihak (Werewolf, Werewolf Pengintai, Pengkhianat) maksimal ${N}, karena satu pemain hanya boleh satu peran berpihak. Badut boleh digabung dengan salah satunya.`:'';
   const s=$('#scr');
   s.classList.toggle('st',!!q);
   s.innerHTML=`<div class="hero2"><div class="lr"><img src="${LOGO}" alt="Logo Karang Taruna Naga Baru"></div><b>Karang Taruna Naga Baru</b><small>Perumahan Pedurungan Baru</small><span class="jp">人狼</span></div><p class="mute">Satu HP diedarkan antar pemain. Saat malam, tiap pemain menjalankan tugas perannya sendiri secara rahasia, tanpa dipanggil narator.</p>
@@ -837,7 +837,7 @@ function setup(q){
   <div class="dist">${ORDER.filter(k=>S.cnt[k]>0).map(k=>`<span class="r-${k}" style="flex:${S.cnt[k]}">${ROLES[k].e} ${S.cnt[k]}</span>`).join('')}</div><div id="chk" class="${err?'bad':''}">${err||(S.dual?`Peran cocok: ${2*N} kartu untuk ${N} pemain (tiap pemain 2 kartu).`:`Peran cocok dengan jumlah pemain (${N}).`)}</div>
   <button class="ghost" data-a="auto">Atur peran otomatis untuk ${N} pemain</button>
   <h3 class="sp">Mode tambahan</h3>
-  <label class="tg"><input type="checkbox" id="dm" ${S.dual?'checked':''}> Mode Peran Ganda: tiap pemain mendapat 2 kartu peran yang berbeda, dibagikan acak dari daftar peran moderator di atas (jumlah peran harus 2 kali jumlah pemain). Peran berpihak (Werewolf, Pengkhianat, Badut) menentukan tim dan cara menang, dan satu pemain hanya boleh memegang satu peran berpihak. Matikan untuk permainan biasa.</label>
+  <label class="tg"><input type="checkbox" id="dm" ${S.dual?'checked':''}> Mode Peran Ganda: tiap pemain mendapat 2 kartu peran yang berbeda, dibagikan acak dari daftar peran moderator di atas (jumlah peran harus 2 kali jumlah pemain). Peran berpihak (Werewolf, Pengkhianat, Badut) menentukan tim dan cara menang, dan satu pemain hanya boleh memegang satu dari Werewolf, Pengkhianat, atau Badut, kecuali Badut yang boleh digabung dengan Werewolf atau Pengkhianat (jika digabung, pemain itu tetap bermain sebagai timnya dan Badut tidak bisa menang). Matikan untuk permainan biasa.</label>
   <h3 class="sp">Tampilan</h3>
   <div class="thm">${[['darah','Darah'],['salju','Salju'],['sakura','Sakura']].map(([k,n])=>`<button class="thc${(S.theme||'darah')===k?' on':''}" data-th="${k}" aria-pressed="${(S.theme||'darah')===k}"><i class="sw sw-${k}"></i>${n}</button>`).join('')}</div>
   <label class="tg"><input type="checkbox" id="tb" ${S.table!==false?'checked':''}> Papan meja bundar (matikan untuk kartu potret)</label>
@@ -861,15 +861,22 @@ function setup(q){
     else if(d.a==='auto'){S.cnt=S.dual?balanceDual(S.names.length):balance(S.names.length);setup(1)}
     else if(d.a==='start')startGame()};
 }
+/* Riwayat peran 3 permainan terakhir (per nama pemain) agar pembagian peran tidak berulang berturut-turut. */
+const histGet=()=>{try{const h=JSON.parse(localStorage.getItem('dk-hist'));return Array.isArray(h)?h:[]}catch(e){return[]}};
+const histSave=g=>{try{const h=histGet();h.unshift(Object.fromEntries(g.ps.map(p=>[p.name,(p.r2?[p.role,p.r2]:[p.role])])));localStorage.setItem('dk-hist',JSON.stringify(h.slice(0,3)))}catch(e){}};
+const repScore=(names,rl,h)=>{let s=0;const w=[9,3,1];h.slice(0,3).forEach((g,gi)=>names.forEach((n,i)=>{const pv=g&&g[n];if(pv)rl[i].forEach(r=>{if(pv.includes(r))s+=w[gi]*(r==='vill'?1:3)})}));return s};
 async function startGame(){
   const seen={};
   S.names=S.names.map((n,i)=>{n=n.trim()||'Pemain '+(i+1);seen[n]=(seen[n]||0)+1;return seen[n]>1?n+' '+seen[n]:n});
   try{localStorage.setItem('dk-setup',JSON.stringify(S))}catch(e){}
   $('#scr').classList.remove('st');if(!S.lite&&!REDUCED())setTimeout(()=>gojoLoad().catch(()=>{}),1500);
-  const roles=shuffle(ORDER.flatMap(k=>Array(S.cnt[k]).fill(k)));
+  const cards=ORDER.flatMap(k=>Array(S.cnt[k]).fill(k)),hist=histGet();
+  let roles=shuffle(cards),dpairs=null;
+  if(S.dual){let bs=1e9;for(let t=0;t<150&&bs>0;t++){const pr=dealDual(shuffle(cards));if(!pr)break;const sc=repScore(S.names,pr,hist);if(sc<bs){bs=sc;dpairs=pr}}}
+  else{let bs=repScore(S.names,roles.map(r=>[r]),hist);for(let t=0;t<400&&bs>0;t++){const r=shuffle(cards),sc=repScore(S.names,r.map(x=>[x]),hist);if(sc<bs){bs=sc;roles=r}}}
   G={ps:S.names.map((n,i)=>({id:i,name:n,lang:S.langs[i],role:roles[i],alive:true})),day:0,lastDoc:{},heal:S.cnt.witch,poison:S.cnt.witch,lastLock:{},has:new Set(roles),pending:[],st:new Set(),log:[]};
-  if(S.dual){let pr_=dealDual(roles);if(!pr_){pr_=[];for(let i=0;i<G.ps.length;i++)pr_.push([roles[2*i],roles[2*i+1]])}applyDual(pr_)}
-  saveGame('deal');await dealRoles();loop();
+  if(S.dual){let pr_=dpairs;if(!pr_){pr_=[];for(let i=0;i<G.ps.length;i++)pr_.push([roles[2*i],roles[2*i+1]])}applyDual(pr_)}
+  histSave(G);saveGame('deal');await dealRoles();loop();
 }
 async function dealRoles(){
   board();label('Bagi peran');
@@ -916,7 +923,7 @@ const rn=p=>p.r2?ROLES[p.role].n+' + '+ROLES[p.r2].n:ROLES[p.role].n;
 const re=p=>p.r2?ROLES[p.role].e+ROLES[p.r2].e:ROLES[p.role].e;
 const r2html=p=>p.r2?`<small class="r2"><b>Peran kedua: ${ROLES[p.r2].e} ${ROLES[p.r2].n}</b>${ROLES[p.r2].d}</small>`:'';
 async function asRole(p,r,fn){const o=p.role;p.pr0=o;p.role=r;try{return await fn()}finally{p.role=o;p.pr0=null}}
-const okPair=(a,b)=>a!==b&&!(alg(a)&&alg(b));
+const okPair=(a,b)=>a!==b&&!(alg(a)&&alg(b)&&a!=='jester'&&b!=='jester');
 function dealDual(cards){
   const n=cards.length/2;
   for(let t=0;t<300;t++){
